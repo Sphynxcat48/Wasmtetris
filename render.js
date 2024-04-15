@@ -1,44 +1,52 @@
-const canvas = document.getElementById("tetrCanvas");
-
-
 // Get the WebGL rendering context
+const canvas = document.getElementById("tetrCanvas");
 const gl = canvas.getContext("webgl");
-
 
 // Check if WebGL is available on the current browser
 if (!gl) {
   alert("WebGL is not supported on this browser.");
 }
 
+// Define the shaders as strings
+const vertexShaderSource = `
+    attribute vec2 a_position;
 
-const rows = 20; // Number of rows in the grid
-const cols = 10; // Number of columns in the grid
-const cellSize = 30; // Size of each cell in pixels
-let grid = initializeGrid(rows, cols); // Initialize the game grid
-
-function createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
-        return null;
+    void main() {
+        gl_Position = vec4(a_position, 0, 1);
     }
-    return shader;
-}
+`;
 
-function createProgram(gl, vertexShader, fragmentShader) {
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error('Program linking error:', gl.getProgramInfoLog(program));
-        return null;
+const fragmentShaderSource = `
+    precision mediump float;
+
+    uniform vec4 u_color;
+
+    void main() {
+        gl_FragColor = u_color;
     }
-    return program;
-}
+`;
 
+// Create the shaders
+const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+// Create the shader program
+const program = createProgram(gl, vertexShader, fragmentShader);
+
+// Use the shader program
+gl.useProgram(program);
+
+// Set up any attributes and uniforms required by the shaders
+// For example, get attribute and uniform locations and set attribute pointers and uniform values
+// Example:
+const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
+gl.enableVertexAttribArray(positionAttributeLocation);
+
+// Clear the canvas
+gl.clear(gl.COLOR_BUFFER_BIT);
+
+// Render grid
+renderGrid(grid, cellSize);
 
 function render() {
     // Clear the canvas
@@ -46,16 +54,16 @@ function render() {
 
     // Render grid
     renderGrid(grid, cellSize);
-renderFilledCell(x, y, cellSize);
+
     // Render Tetris pieces
-    // You would need to implement logic for rendering active Tetris piece
-    // and any other game elements
+    // renderPiece(piece, position, cellSize);
 
     requestAnimationFrame(render);
 }
 
 // Start the render loop
 render();
+
 
 
 function initializeGrid(rows, cols) {
