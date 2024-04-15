@@ -115,7 +115,7 @@ function renderFilledCell(x, y, cellSize, color) {
 }
 
 // Adjust the aspect ratio of the canvas to fit the desired shape
-const desiredAspectRatio = 10 / 20; // Tetris board width-to-height ratio
+const desiredAspectRatio = 1.0 / 2.0; // Tetris board width-to-height ratio
 const canvasAspectRatio = canvas.width / canvas.height;
 
 let scaleX = 1;
