@@ -1,3 +1,21 @@
+const fragmentShaderSource = `
+    precision mediump float;
+
+    uniform vec4 u_color;
+
+    void main() {
+        gl_FragColor = u_color;
+    }
+`;
+
+// Create the shaders
+const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+// Create the shader program
+const program = createProgram(gl, vertexShader, fragmentShader);
+
+
 // Define the createShader function
 function createShader(gl, type, source) {
     const shader = gl.createShader(type);
@@ -41,22 +59,6 @@ const vertexShaderSource = `
     }
 `;
 
-const fragmentShaderSource = `
-    precision mediump float;
-
-    uniform vec4 u_color;
-
-    void main() {
-        gl_FragColor = u_color;
-    }
-`;
-
-// Create the shaders
-const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-
-// Create the shader program
-const program = createProgram(gl, vertexShader, fragmentShader);
 
 // Use the shader program
 gl.useProgram(program);
