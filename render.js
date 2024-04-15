@@ -1,4 +1,3 @@
-
 // Define the createShader function
 function createShader(gl, type, source) {
     const shader = gl.createShader(type);
@@ -59,8 +58,6 @@ const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource
 // Create the shader program
 const program = createProgram(gl, vertexShader, fragmentShader);
 
-
-
 // Use the shader program
 gl.useProgram(program);
 
@@ -98,12 +95,12 @@ function initializeGrid(rows, cols) {
 }
 
 // Function to render the grid
-function renderGrid(grid, cellSize) {
+function renderGrid(grid, cellSize, color) {
     // Render each filled cell of the grid
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
             if (grid[i][j] === 1) {
-               renderFilledCell(i, j, cellSize);
+               renderFilledCell(i, j, cellSize, color);
             }
         }
     }
@@ -132,9 +129,10 @@ function renderFilledCell(x, y, cellSize, color) {
     gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionAttributeLocation);
 
-     const colorLocation = gl.getUniformLocation(program, 'u_color');
+    const colorLocation = gl.getUniformLocation(program, 'u_color');
     gl.uniform4fv(colorLocation, color);
 
     // Draw the rectangle
     gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
 }
+
