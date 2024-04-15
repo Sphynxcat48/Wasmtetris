@@ -1,28 +1,3 @@
-// Define the createShader function
-function createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
-        return null;
-    }
-    return shader;
-}
-
-// Define the createProgram function
-function createProgram(gl, vertexShader, fragmentShader) {
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error('Program linking error:', gl.getProgramInfoLog(program));
-        return null;
-    }
-    return program;
-}
-
 // Get the WebGL rendering context
 const canvas = document.getElementById("tetrCanvas");
 const gl = canvas.getContext("webgl");
@@ -74,9 +49,9 @@ const cols = 10; // Number of columns in the grid
 const cellSize = 30; // Size of each cell in pixels
 let grid = initializeGrid(rows, cols); // Initialize the game grid
 grid[0][0] = 1;
-// grid[0][1] = 1;
-// grid[1][0] = 1;
-// grid[1][1] = 1;
+grid[0][1] = 1;
+grid[1][0] = 1;
+grid[1][1] = 1;
 
 // Render the grid
 const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
@@ -112,12 +87,14 @@ function renderFilledCell(x, y, cellSize, color) {
     const xPos = x * cellSize;
     const yPos = y * cellSize;
 
-    // Define the vertices of the rectangle
+    // Define the vertices of the square
     const vertices = [
         xPos, yPos,
         xPos + cellSize, yPos,
         xPos + cellSize, yPos + cellSize,
-        xPos, yPos + cellSize
+        xPos, yPos,
+        xPos, yPos + cellSize,
+        xPos + cellSize, yPos + cellSize
     ];
 
     // Create a buffer and bind it
@@ -129,10 +106,24 @@ function renderFilledCell(x, y, cellSize, color) {
     gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionAttributeLocation);
 
+    // Set the color
     const colorLocation = gl.getUniformLocation(program, 'u_color');
     gl.uniform4fv(colorLocation, color);
 
-    // Draw the rectangle
-    gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+    // Draw the square
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
 }
 
+// Adjust the aspect ratio of the canvas to fit the desired shape
+const desiredAspectRatio = 10 / 20; // Tetris board width-to-height ratio
+const canvasAspectRatio = canvas.width / canvas.height;
+
+let scaleX = 1;
+let scaleY = 1;
+if (canvasAspectRatio > desiredAspectRatio) {
+    scaleY = canvasAspectRatio / desiredAspectRatio;
+} else {
+    scaleX = desiredAspectRatio / canvasAspectRatio;
+}
+
+gl.scale(scaleX, scaleY);
