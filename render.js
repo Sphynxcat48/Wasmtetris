@@ -46,7 +46,7 @@ function render() {
 
     // Render grid
     renderGrid(grid, cellSize);
-
+renderFilledCell(x, y, cellSize);
     // Render Tetris pieces
     // You would need to implement logic for rendering active Tetris piece
     // and any other game elements
