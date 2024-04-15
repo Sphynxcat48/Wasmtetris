@@ -74,9 +74,9 @@ const cols = 10; // Number of columns in the grid
 const cellSize = 30; // Size of each cell in pixels
 let grid = initializeGrid(rows, cols); // Initialize the game grid
 grid[0][0] = 1;
-grid[0][1] = 1;
-grid[1][0] = 1;
-grid[1][1] = 1;
+// grid[0][1] = 1;
+// grid[1][0] = 1;
+// grid[1][1] = 1;
 
 // Render the grid
 const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
