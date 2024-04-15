@@ -71,7 +71,7 @@ gl.clear(gl.COLOR_BUFFER_BIT);
 // Initialize the game grid
 const rows = 20; // Number of rows in the grid
 const cols = 10; // Number of columns in the grid
-const cellSize = 30; // Size of each cell in pixels
+const cellSize = 10; // Size of each cell in pixels
 let grid = initializeGrid(rows, cols); // Initialize the game grid
 // grid[0][0] = 1;
 // grid[0][1] = 1;
