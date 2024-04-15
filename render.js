@@ -1,4 +1,4 @@
-const canvas = document.getElementById("webglCanvas");
+const canvas = document.getElementById("tetrCanvas");
 
 
 // Get the WebGL rendering context
