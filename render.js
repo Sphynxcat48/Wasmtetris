@@ -35,15 +35,15 @@ if (!gl) {
 // Define the shaders as strings
 const vertexShaderSource = `
     attribute vec2 a_position;
+    uniform vec2 u_scale;
 
     void main() {
-        gl_Position = vec4(a_position, 0, 1);
+        gl_Position = vec4(a_position * u_scale, 0, 1);
     }
 `;
 
 const fragmentShaderSource = `
     precision mediump float;
-
     uniform vec4 u_color;
 
     void main() {
@@ -151,4 +151,6 @@ if (canvasAspectRatio > desiredAspectRatio) {
     scaleX = desiredAspectRatio / canvasAspectRatio;
 }
 
-gl.scale(scaleX, scaleY);
+// Set the scale uniform
+const scaleLocation = gl.getUniformLocation(program, 'u_scale');
+gl.uniform2f(scaleLocation, scaleX, scaleY);
