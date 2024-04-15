@@ -4,7 +4,7 @@
 
 ## How it works
 
-### I am writing the logic for this program in c++ and compiling it to webassembly. This allows the game to run faster and natively on your computer. I am rendering the graphics in WebGL and using custom input/output functions to transfer information from the wasm modules to the WebGL.
+### I am writing the logic for this program in c++ and compiling it to webassembly. This allows the game to run faster than runnin it in javaScript. I am rendering the graphics in WebGL and using custom input/output functions to transfer information from the wasm modules to the WebGL.
 
 
 ## UML
