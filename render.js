@@ -81,7 +81,8 @@ grid[1][0] = 1;
 grid[1][1] = 1;
 
 // Render the grid
-renderGrid(grid, cellSize);
+const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
+renderGrid(grid, cellSize, squareColor);
 
 // Function to initialize the grid
 function initializeGrid(rows, cols) {
@@ -108,7 +109,7 @@ function renderGrid(grid, cellSize) {
 }
 
 // Function to render a filled cell
-function renderFilledCell(x, y, cellSize) {
+function renderFilledCell(x, y, cellSize, color) {
     // Calculate the coordinates of the cell in pixels
     const xPos = x * cellSize;
     const yPos = y * cellSize;
@@ -129,6 +130,9 @@ function renderFilledCell(x, y, cellSize) {
     // Assign the buffer to a_position attribute
     gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionAttributeLocation);
+
+     const colorLocation = gl.getUniformLocation(program, 'u_color');
+    gl.uniform4fv(colorLocation, color);
 
     // Draw the rectangle
     gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
