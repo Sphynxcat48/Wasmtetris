@@ -10,7 +10,7 @@ if (!gl) {
   alert("WebGL is not supported on this browser.");
 }
 
-
+gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 // Set clear color to black, and clear the canvas
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT);
