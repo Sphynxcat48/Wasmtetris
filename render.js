@@ -15,11 +15,11 @@ gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT);
 
-function initializeGrid(rows, cols) {
+function initializeGrid(20, 10) {
     let grid = [];
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < 20; i++) {
         grid[i] = [];
-        for (let j = 0; j < cols; j++) {
+        for (let j = 0; j < 10; j++) {
             grid[i][j] = 0; // 0 represents empty cell
         }
     }
