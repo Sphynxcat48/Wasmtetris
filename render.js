@@ -10,16 +10,36 @@ if (!gl) {
   alert("WebGL is not supported on this browser.");
 }
 
-gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-// Set clear color to black, and clear the canvas
-gl.clearColor(0.0, 0.0, 0.0, 1.0);
-gl.clear(gl.COLOR_BUFFER_BIT);
 
-function initializeGrid(20, 10) {
+const rows = 20; // Number of rows in the grid
+const cols = 10; // Number of columns in the grid
+const cellSize = 30; // Size of each cell in pixels
+let grid = initializeGrid(rows, cols); // Initialize the game grid
+
+
+function render() {
+    // Clear the canvas
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // Render grid
+    renderGrid(grid, cellSize);
+
+    // Render Tetris pieces
+    // You would need to implement logic for rendering active Tetris piece
+    // and any other game elements
+
+    requestAnimationFrame(render);
+}
+
+// Start the render loop
+render();
+
+
+function initializeGrid(rows, cols) {
     let grid = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < rows; i++) {
         grid[i] = [];
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < cols; j++) {
             grid[i][j] = 0; // 0 represents empty cell
         }
     }
