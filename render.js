@@ -36,36 +36,23 @@ const program = createProgram(gl, vertexShader, fragmentShader);
 // Use the shader program
 gl.useProgram(program);
 
-// Set up any attributes and uniforms required by the shaders
-// For example, get attribute and uniform locations and set attribute pointers and uniform values
-// Example:
+// Set up attributes and uniforms required by the shaders
 const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
 gl.enableVertexAttribArray(positionAttributeLocation);
 
 // Clear the canvas
 gl.clear(gl.COLOR_BUFFER_BIT);
 
-// Render grid
+// Initialize the game grid
+const rows = 20; // Number of rows in the grid
+const cols = 10; // Number of columns in the grid
+const cellSize = 30; // Size of each cell in pixels
+let grid = initializeGrid(rows, cols); // Initialize the game grid
+
+// Render the grid
 renderGrid(grid, cellSize);
 
-function render() {
-    // Clear the canvas
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
-    // Render grid
-    renderGrid(grid, cellSize);
-
-    // Render Tetris pieces
-    // renderPiece(piece, position, cellSize);
-
-    requestAnimationFrame(render);
-}
-
-// Start the render loop
-render();
-
-
-
+// Function to initialize the grid
 function initializeGrid(rows, cols) {
     let grid = [];
     for (let i = 0; i < rows; i++) {
@@ -77,8 +64,9 @@ function initializeGrid(rows, cols) {
     return grid;
 }
 
+// Function to render the grid
 function renderGrid(grid, cellSize) {
-    // Render each cell of the grid
+    // Render each filled cell of the grid
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
             if (grid[i][j] === 1) {
@@ -88,19 +76,7 @@ function renderGrid(grid, cellSize) {
     }
 }
 
-
-function renderPiece(piece, position, cellSize) {
-    // Render each block of the piece
-    for (let i = 0; i < piece.length; i++) {
-        for (let j = 0; j < piece[i].length; j++) {
-            if (piece[i][j] === 1) {
-                // Render filled block
-                // Use WebGL to draw a square at position ((i + position.x) * cellSize, (j + position.y) * cellSize) with dimensions cellSize x cellSize
-            }
-        }
-    }
-}
-
+// Function to render a filled cell
 function renderFilledCell(x, y, cellSize) {
     // Calculate the coordinates of the cell in pixels
     const xPos = x * cellSize;
@@ -120,9 +96,8 @@ function renderFilledCell(x, y, cellSize) {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
     // Assign the buffer to a_position attribute
-    const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(positionAttributeLocation);
     gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionAttributeLocation);
 
     // Draw the rectangle
     gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
