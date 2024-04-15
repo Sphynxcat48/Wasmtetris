@@ -154,3 +154,91 @@ if (canvasAspectRatio > desiredAspectRatio) {
 // Set the scale uniform
 const scaleLocation = gl.getUniformLocation(program, 'u_scale');
 gl.uniform2f(scaleLocation, scaleX, scaleY);
+
+// Define the Tetris piece classes
+class TetrisPiece {
+    constructor(shape, color) {
+        this.shape = shape;
+        this.color = color;
+        this.rotationIndex = 0;
+    }
+
+    rotateClockwise() {
+        this.rotationIndex = (this.rotationIndex + 1) % 4;
+    }
+
+    rotateCounterClockwise() {
+        this.rotationIndex = (this.rotationIndex - 1 + 4) % 4;
+    }
+
+    getCurrentShape() {
+        return this.shape[this.rotationIndex];
+    }
+}
+
+// Define the Tetris piece subclasses
+class LPiece extends TetrisPiece {
+    constructor() {
+        const shape = [
+            [[1, 0],
+             [1, 0],
+             [1, 1]],
+            [[1, 1, 1],
+             [1, 0, 0]],
+            [[1, 1],
+             [0, 1],
+             [0, 1]],
+            [[0, 0, 1],
+             [1, 1, 1]]
+        ];
+        const color = [1, 0.647, 0, 1]; // orange
+        super(shape, color);
+    }
+}
+
+class JPiece extends TetrisPiece {
+    constructor() {
+        const shape = [
+            [[0, 1],
+             [0, 1],
+             [1, 1]],
+            [[1, 0, 0],
+             [1, 1, 1]],
+            [[1, 1],
+             [1, 0],
+             [1, 0]],
+            [[1, 1, 1],
+             [0, 0, 1]]
+        ];
+        const color = [0, 0, 1, 1]; // blue
+        super(shape, color);
+    }
+}
+
+// Repeat the same for the other Tetris piece classes (TPiece, SPiece, ZPiece, IPiece, OPiece)
+
+// Create instances of Tetris pieces
+const lPiece = new LPiece();
+const jPiece = new JPiece();
+// Create instances of other Tetris pieces here
+
+// Render the Tetris pieces
+renderTetrisPiece(lPiece, 0, 0, cellSize);
+renderTetrisPiece(jPiece, 3, 0, cellSize);
+// Render other Tetris pieces as needed
+
+// Function to render a Tetris piece
+function renderTetrisPiece(piece, x, y, cellSize) {
+    const shape = piece.getCurrentShape();
+    const color = piece.color;
+    
+    for (let i = 0; i < shape.length; i++) {
+        for (let j = 0; j < shape[i].length; j++) {
+            if (shape[i][j] === 1) {
+                const xPos = (x + j) * cellSize;
+                const yPos = (y + i) * cellSize;
+                renderFilledCell(xPos, yPos, cellSize, color);
+            }
+        }
+    }
+}
