@@ -86,50 +86,9 @@ function initializeGrid(rows, cols) {
     return grid;
 }
 
-// Function to render the grid
-function renderGrid(grid, cellSize, color) {
-    // Render each filled cell of the grid
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === 1) {
-               renderFilledCell(i, j, cellSize, color);
-            }
-        }
-    }
-}
 
-// Function to render a filled cell
-function renderFilledCell(x, y, cellSize, color) {
-    // Calculate the coordinates of the cell in pixels
-    const xPos = x * cellSize;
-    const yPos = y * cellSize;
 
-    // Define the vertices of the square
-    const vertices = [
-        xPos, yPos,
-        xPos + cellSize, yPos,
-        xPos + cellSize, yPos + cellSize,
-        xPos, yPos,
-        xPos, yPos + cellSize,
-        xPos + cellSize, yPos + cellSize
-    ];
 
-    // Create a buffer and bind it
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-
-    // Assign the buffer to a_position attribute
-    gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(positionAttributeLocation);
-
-    // Set the color
-    const colorLocation = gl.getUniformLocation(program, 'u_color');
-    gl.uniform4fv(colorLocation, color);
-
-    // Draw the square
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-}
 
 // Adjust the aspect ratio of the canvas to fit the desired shape
 const desiredAspectRatio = 1.0 / 2.0; // Tetris board width-to-height ratio
@@ -286,10 +245,52 @@ const lPiece = new LPiece();
 //const jPiece = new JPiece();
 // Create instances of other Tetris pieces here
 
-// Render the Tetris pieces
-renderTetrisPiece(lPiece, 0, 0, cellSize);
-//renderTetrisPiece(jPiece, 3, 0, cellSize);
-// Render other Tetris pieces as needed
+
+
+
+// Function to render the grid
+function renderGrid(grid, cellSize, color) {
+    // Render each filled cell of the grid
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] === 1) {
+               renderFilledCell(i, j, cellSize, color);
+            }
+        }
+    }
+}
+// Function to render a filled cell
+function renderFilledCell(x, y, cellSize, color) {
+    // Calculate the coordinates of the cell in pixels
+    const xPos = x * cellSize;
+    const yPos = y * cellSize;
+
+    // Define the vertices of the square
+    const vertices = [
+        xPos, yPos,
+        xPos + cellSize, yPos,
+        xPos + cellSize, yPos + cellSize,
+        xPos, yPos,
+        xPos, yPos + cellSize,
+        xPos + cellSize, yPos + cellSize
+    ];
+
+    // Create a buffer and bind it
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+    // Assign the buffer to a_position attribute
+    gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionAttributeLocation);
+
+    // Set the color
+    const colorLocation = gl.getUniformLocation(program, 'u_color');
+    gl.uniform4fv(colorLocation, color);
+
+    // Draw the square
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+}
 
 // Function to render a Tetris piece
 function renderTetrisPiece(piece, x, y, cellSize) {
@@ -306,3 +307,7 @@ function renderTetrisPiece(piece, x, y, cellSize) {
         }
     }
 }
+// Render the Tetris pieces
+renderTetrisPiece(lPiece, 0, 0, cellSize);
+//renderTetrisPiece(jPiece, 3, 0, cellSize);
+// Render other Tetris pieces as needed
