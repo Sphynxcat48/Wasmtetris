@@ -71,7 +71,7 @@ gl.clear(gl.COLOR_BUFFER_BIT);
 // Initialize the game grid
 const rows = 20; // Number of rows in the grid
 const cols = 10; // Number of columns in the grid
-const cellSize = 10; // Size of each cell in pixels
+const cellSize = 30; // Size of each cell in pixels
 let grid = initializeGrid(rows, cols); // Initialize the game grid
 // grid[0][0] = 1;
 // grid[0][1] = 1;
@@ -224,7 +224,7 @@ const jPiece = new JPiece();
 
 // Render the Tetris pieces
 renderTetrisPiece(lPiece, 0, 0, cellSize);
-renderTetrisPiece(jPiece, 3, 0, cellSize);
+//renderTetrisPiece(jPiece, 3, 0, cellSize);
 // Render other Tetris pieces as needed
 
 // Function to render a Tetris piece
