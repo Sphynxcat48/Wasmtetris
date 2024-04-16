@@ -1,3 +1,5 @@
+import * from 'pieces.js';
+
 // Define the createShader function
 function createShader(gl, type, source) {
     const shader = gl.createShader(type);
