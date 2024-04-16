@@ -73,14 +73,6 @@ const rows = 20; // Number of rows in the grid
 const cols = 10; // Number of columns in the grid
 const cellSize = 30; // Size of each cell in pixels
 let grid = initializeGrid(rows, cols); // Initialize the game grid
-// grid[0][0] = 1;
-// grid[0][1] = 1;
-// grid[1][0] = 1;
-// grid[1][1] = 1;
-
-// Render the grid
-//const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
-//renderGrid(grid, cellSize, squareColor);
 
 // Function to initialize the grid
 function initializeGrid(rows, cols) {
@@ -195,6 +187,7 @@ class LPiece extends TetrisPiece {
         super(shape, color);
     }
 }
+
 class SPiece extends TetrisPiece {
     constructor() {
         const shape = [
@@ -302,10 +295,6 @@ renderTetrisPiece(lPiece, 0, 0, cellSize);
 function renderTetrisPiece(piece, x, y, cellSize) {
     const shape = piece.getCurrentShape();
     const color = piece.color;
-
-    function renderTetrisPiece(piece, x, y, cellSize) {
-    const shape = piece.getCurrentShape();
-    const color = piece.color;
     
     for (let i = 0; i < shape.length; i++) {
         for (let j = 0; j < shape[i].length; j++) {
@@ -317,5 +306,3 @@ function renderTetrisPiece(piece, x, y, cellSize) {
         }
     }
 }
-
-  
