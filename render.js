@@ -231,14 +231,20 @@ renderTetrisPiece(lPiece, 0, 0, cellSize);
 function renderTetrisPiece(piece, x, y, cellSize) {
     const shape = piece.getCurrentShape();
     const color = piece.color;
+
+    function renderTetrisPiece(piece, x, y, cellSize) {
+    const shape = piece.getCurrentShape();
+    const color = piece.color;
     
     for (let i = 0; i < shape.length; i++) {
         for (let j = 0; j < shape[i].length; j++) {
             if (shape[i][j] === 1) {
-                const xPos = (x + j) * cellSize;
-                const yPos = (y + i) * cellSize;
+                const xPos = (x + j) * cellSize; // Adjusted calculation for x position
+                const yPos = (y + i) * cellSize; // Adjusted calculation for y position
                 renderFilledCell(xPos, yPos, cellSize, color);
             }
         }
     }
 }
+
+  
