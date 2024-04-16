@@ -283,7 +283,7 @@ class JPiece extends TetrisPiece {
 
 // Create instances of Tetris pieces
 const lPiece = new LPiece();
-const jPiece = new JPiece();
+//const jPiece = new JPiece();
 // Create instances of other Tetris pieces here
 
 // Render the Tetris pieces
