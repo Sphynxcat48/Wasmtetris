@@ -79,8 +79,8 @@ let grid = initializeGrid(rows, cols); // Initialize the game grid
 // grid[1][1] = 1;
 
 // Render the grid
-const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
-renderGrid(grid, cellSize, squareColor);
+//const squareColor = [1.0, 0.0, 0.0, 1.0]; // Red color
+//renderGrid(grid, cellSize, squareColor);
 
 // Function to initialize the grid
 function initializeGrid(rows, cols) {
