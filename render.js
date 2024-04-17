@@ -3,19 +3,19 @@ class TetrisPiece {
     constructor(shape, color) {
         this.shape = shape;
         this.color = color;
-        this.rotationIndex = 0;
+        this.rotateIndex = 0;
     }
 
-    rotateClockwise() {
-        this.rotationIndex = (this.rotationIndex + 1) % 4;
+    rotateClock() {
+        this.rotateIndex = (this.rotateIndex + 1) % 4;
     }
 
-    rotateCounterClockwise() {
-        this.rotationIndex = (this.rotationIndex - 1 + 4) % 4;
+    rotateCountClock() {
+        this.rotateIndex = (this.rotateIndex - 1 + 4) % 4;
     }
 
     getCurrentShape() {
-        return this.shape[this.rotationIndex];
+        return this.shape[this.rotateIndex];
     }
 }
 
@@ -259,13 +259,13 @@ function renderGrid(grid, cellSize, color) {
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
             if (grid[i][j] === 1) {
-               renderFilledCell(i, j, cellSize, color);
+               renderCell(i, j, cellSize, color);
             }
         }
     }
 }
 // Function to render a filled cell
-function renderFilledCell(x, y, cellSize, color) {
+function renderCell(x, y, cellSize, color) {
     // Calculate the coordinates of the cell in pixels
     const xPos = x * cellSize;
     const yPos = y * cellSize;
@@ -298,21 +298,22 @@ function renderFilledCell(x, y, cellSize, color) {
 }
 
 // Function to render a Tetris piece
-function renderTetrisPiece(piece, x, y, cellSize) {
+function renderTP(piece, x, y, cellSize) {
     const shape = piece.getCurrentShape();
     const color = piece.color;
-    
+
     for (let i = 0; i < shape.length; i++) {
         for (let j = 0; j < shape[i].length; j++) {
             if (shape[i][j] === 1) {
                 const xPos = (x + j) * cellSize; // Adjusted calculation for x position
                 const yPos = (y + i) * cellSize; // Adjusted calculation for y position
-                renderFilledCell(xPos, yPos, cellSize, color);
+                renderCell(xPos, yPos, cellSize, color);
             }
         }
     }
 }
 // Render the Tetris pieces
-renderTetrisPiece(lPiece, 0, 0, cellSize);
+renderTP(lPiece, 0, 0, cellSize);
 //renderTetrisPiece(jPiece, 3, 0, cellSize);
 // Render other Tetris pieces as needed
+//grid[5][8] == 1;
