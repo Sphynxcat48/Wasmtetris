@@ -247,8 +247,8 @@
     if (gameOver) return;
 
     // left and right arrow keys (move)
-    if (e.which === 37 || e.which === 39) {
-      const col = e.which === 37
+    if (e.which === 65 || e.which === 68) {
+      const col = e.which === 65
         ? tetromino.col - 1
         : tetromino.col + 1;
 
@@ -258,7 +258,7 @@
     }
 
     // up arrow key (rotate)
-    if (e.which === 38) {
+    if (e.which === 87) {
       const matrix = rotate(tetromino.matrix);
       if (isValidMove(matrix, tetromino.row, tetromino.col)) {
         tetromino.matrix = matrix;
@@ -266,7 +266,7 @@
     }
 
     // down arrow key (drop)
-    if(e.which === 40) {
+    if(e.which === 83) {
       const row = tetromino.row + 1;
 
       if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
