@@ -216,7 +216,7 @@ function loop() {
   if (tetromino) {
 
     // Speed up the falling tetromino
-    let speed = 35 - (tetrominoSequence.length / 2); // Change this formula according to your preference
+    let speed = 35 - Math.floor(tetrominoSequence.length / 5) * 5; // Change this formula according to your preference
     speed = speed < 10 ? 10 : speed; // Ensure speed doesn't fall below 10
 
     if (++count > speed) {
