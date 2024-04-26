@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="homePage"><!-- What's this for? -->
+<head>
+  <title>WasmTetris</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <style>
+   canvas {
+      border: 1px solid white;
+      display: block;
+      margin: 0 auto;
+    }
+   
+    .blackColor {
+      background-color: #444;
+      width: 95%;
+      color: #eee;
+      padding-left: 10px;
+    }
+   .footer{
+padding-left: 10px;
+    
+   }
+    
+  </style>
+
+</head>
+
+<body>
+  <div class="blackColor">
+    <div class="container">
+      <h3>WasmTetris</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="inner cover">
+      <br>
+      <br>
+      <div class="smaller"></div>
+   
+         
+  <canvas id="game" width="320" height="640"></canvas>
+         <script src="tetris.js"></script>
+      
+        <h1 class="cover-heading">Game in development:)</h1>
+        <br>
+        <p class="lead">Welcome to WasmTetris!
+        </p>
+       
+  
+
+    </div>
+
+    <!-- start of footer -->
+    <div class="footer blackColor" id="smallFont">
+      <br>
+      <p> Brought to you by - Martin and Emscripten!
+        <!-- links to credits -->
+      
+      </p>
+    </div>
+    <!-- end of footer -->
+  </div><!-- end of container div -->
+
+</body>
+
+</html>
