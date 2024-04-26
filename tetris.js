@@ -119,7 +119,7 @@ function showGameOver() {
   context.font = '36px monospace';
   context.textAlign = 'center';
   context.textBaseline = 'middle';
-  context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+  context.fillText('GAME OVER:(', canvas.width / 2, canvas.height / 2);
 }
 
 const canvas = document.getElementById('game');
