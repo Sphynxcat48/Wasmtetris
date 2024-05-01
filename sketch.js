@@ -1,3 +1,42 @@
+class Button {
+  constructor(tempX, tempY, tempW, tempH, val, isNum) {
+    this.x = tempX;
+    this.y = tempY;
+    this.w = tempW;
+    this.h = tempH;
+    this.on = false;
+    this.val = val;
+    this.isNum = isNum;
+  }
+
+  display() {
+    rectMode(CENTER);
+    if (this.on) {
+      fill("#496243");
+    } else {
+      fill("#5D7C56");
+    }
+    rect(this.x, this.y, this.w, this.h, 5);
+    fill("#253B2F");
+    textAlign(CENTER);
+    textSize(25);
+    text(this.val, this.x, this.y + 8);
+  }
+
+  hover() {
+    if (
+      mouseX > this.x - this.w / 2 &&
+      mouseX < this.x + this.w / 2 &&
+      mouseY > this.y - this.h / 2 &&
+      mouseY < this.y + this.h / 2
+    ) {
+      this.on = true;
+    } else {
+      this.on = false;
+    }
+  }
+}
+
 let buttons = [];
 let dVal, op;
 let left;
@@ -68,29 +107,29 @@ function keyPressed() {
     handleEvent("8", true);
   } else if (key == 9 || keyCode == 105 || keyCode == 57) {
     handleEvent("9", true);
-  } else if (key == '+' || keyCode == 107) {
+  } else if (key == "+" || keyCode == 107) {
     handleEvent("+", false);
-  } else if (key == '-' || keyCode == 109) {
+  } else if (key == "-" || keyCode == 109) {
     handleEvent("-", false);
-  } else if (key == '*' || keyCode == 106) {
+  } else if (key == "*" || keyCode == 106) {
     handleEvent("×", false);
-  } else if (key == '/' || keyCode == 111) {
+  } else if (key == "/" || keyCode == 111) {
     handleEvent("÷", false);
-  } else if (key == '-' || keyCode == 45) {
+  } else if (key == "-" || keyCode == 45) {
     handleEvent("+/-", false);
-  } else if (key == 's' || keyCode == 83) {
+  } else if (key == "s" || keyCode == 83) {
     handleEvent("√", false);
-  } else if (key == 't' || keyCode == 84) {
+  } else if (key == "t" || keyCode == 84) {
     handleEvent("x²", false);
-  } else if (key == 'c' || keyCode == 67) {
+  } else if (key == "c" || keyCode == 67) {
     handleEvent("AC", false);
-  } else if (key == 'p' || keyCode == 80) {
+  } else if (key == "p" || keyCode == 80) {
     handleEvent("π", false);
-  } else if (key == 'r' || keyCode == 82) {
+  } else if (key == "r" || keyCode == 82) {
     handleEvent("R", false);
-  } else if (key == 'e' || keyCode == 69) {
+  } else if (key == "e" || keyCode == 69) {
     handleEvent("e", false);
-  } else if (key == '=' || keyCode == 61 || keyCode == 10) {
+  } else if (key == "=" || keyCode == 61 || keyCode == 10) {
     handleEvent("=", false);
   }
 }
@@ -245,43 +284,4 @@ function performCalculation() {
   }
   dVal = result.toString();
   l = result;
-}
-
-class Button {
-  constructor(x, y, w, h, val, isNum) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.val = val;
-    this.isNum = isNum;
-    this.on = false;
-  }
-
-  display() {
-    stroke(255);
-    if (this.on) {
-      fill(255, 150, 0);
-    } else {
-      fill(255);
-    }
-    rect(this.x, this.y, this.w, this.h, 10);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    textSize(20);
-    text(this.val, this.x + this.w / 2, this.y + this.h / 2);
-  }
-
-  hover() {
-    if (
-      mouseX > this.x &&
-      mouseX < this.x + this.w &&
-      mouseY > this.y &&
-      mouseY < this.y + this.h
-    ) {
-      this.on = true;
-    } else {
-      this.on = false;
-    }
-  }
 }
